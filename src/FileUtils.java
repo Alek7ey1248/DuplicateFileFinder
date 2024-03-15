@@ -48,7 +48,7 @@ public class FileUtils {
 
         public List<File> groupFilesBySize(List<File> fileList) {
             List<File> result = new ArrayList<>();
-            // Implement grouping logic based on file size here
+            // Тут можна реалізувати логіку угруповання з урахуванням розміру файла.
             return result;
         }
 
