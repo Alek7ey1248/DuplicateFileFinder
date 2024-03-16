@@ -13,11 +13,11 @@ import java.util.List;
             this.fileUtils = new FileUtils();
         }
 
-        public void findDuplicates(String directoryPath) {
+        public List<List<File>> findDuplicates(String directoryPath) {
             File directory = new File(directoryPath);
             if (!directory.exists() || !directory.isDirectory()) {
-                System.err.println("Invalid directory path.");
-                return;
+                System.err.println("Неправильний шлях до каталогу.");
+                return null;
             }
             List<File> fileList = listFiles(directory);
             List<List<File>> duplicateGroups = new ArrayList<>();
@@ -37,17 +37,19 @@ import java.util.List;
                 }
             }
 
-            for (List<File> group : duplicateGroups) {
-                System.out.println("Duplicate Group:");
-                for (File file : group) {
-                    System.out.println(file.getAbsolutePath());
-                }
-                System.out.println();
-            }
+//            for (List<File> group : duplicateGroups) {
+//                System.out.println("Група дублікатів:");
+//                for (File file : group) {
+//                    System.out.println(file.getAbsolutePath());
+//                }
+//                System.out.println();
+//            }
+            return duplicateGroups;
         }
 
+
         private List<File> listFiles(File directory) {
-            System.out.println(" перевірка директорія - " + directory);
+            //System.out.println(" перевірка директорія - " + directory);
             List<File> fileList = new ArrayList<>();
             File[] files = directory.listFiles();
             if (files != null) {
@@ -61,6 +63,7 @@ import java.util.List;
             }
             return fileList;
         }
+
 
 
 

@@ -9,7 +9,7 @@ public class TestFileUtils {
         //String file = "/home/alek7ey/Рабочий стол/Courses Coursera/Землетрясения: интерфейсы/Интерфейс Comparable/Стартовая программа эффективной сортировки/EfficientSortStarterProgram/DifferentSorters.java";
         //String file = "/home/alek7ey/.bash_history";
         //String file = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/photo_2021-12-09_16-13-39 (копия).jpg";
-        String file = "/home/alek7ey/Загрузки/InterfaceAbstractStarterProgram.zip";
+        String file = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12/c1.txt";
 
         String strFile = fu.readFile(file);
         System.out.println(strFile);
