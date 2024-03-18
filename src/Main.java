@@ -8,11 +8,13 @@ public class Main {
 
     public static void main(String[] args) {
 
+        long startTime = System.nanoTime();
+
         List<String> paths = new ArrayList<String>();
-        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11");
-        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
-        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
-        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
+        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11");paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
+        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
+        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
+        paths.add("/home/alek7ey/Рабочий стол");
 
         // проверим валидность аргументов
         ArgumentsProcessor processor = new ArgumentsProcessor();
@@ -31,6 +33,10 @@ public class Main {
             DuplicateFileGroup group = new DuplicateFileGroup(duplicateGroups);
             group.printDuplicateGroups();
         }
+
+        long endTime = System.nanoTime();
+        long duration = (endTime - startTime) / 1_000_000; // Перевод наносекунд в миллисекунды
+        System.out.println("Время выполнения программы: " + duration + " мс");
     }
 
 }
