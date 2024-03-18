@@ -11,11 +11,12 @@ public class Main {
         long startTime = System.nanoTime();
 
         List<String> paths = new ArrayList<String>();
-        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11");paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
+        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11");
+        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
         //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
-        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
+        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
         //paths.add("/home/alek7ey/Рабочий стол");
-        paths.add("/home/alek7ey");
+        //paths.add("/home/alek7ey");
 
         // проверим валидность аргументов
         ArgumentsProcessor processor = new ArgumentsProcessor();
