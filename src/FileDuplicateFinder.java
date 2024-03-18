@@ -22,23 +22,23 @@ public class FileDuplicateFinder {
         this.fileUtils = new FileUtils();
     }
 
-    public List<List<File>> findDuplicates(String directoryPath) {
-        File directory = new File(directoryPath);
-        List<File> fileList = listFiles(directory);
-        List<List<File>> duplicateGroups = new ArrayList<>();
-        List<File> checkedFiles = new ArrayList<>();
+    public List<Set<File>> findDuplicates(List<File> fileList) {
+
+        List<Set<File>> duplicateGroups = new ArrayList<>();
+        List<File> checkedDuplicateGroups = new ArrayList<>();
 
         for (int i = 0; i < fileList.size(); i++) {
-            if (checkedFiles.contains(fileList.get(i))) {
+            if (checkedDuplicateGroups.contains(fileList.get(i))) {
                 continue; // Пропускаем файл, если уже был добавлен в другую группу
             }
-            List<File> group = new ArrayList<>();
+//            List<File> group = new ArrayList<>();
+            Set<File> group = new HashSet<>();
             if (!duplicateGroups.contains(group)) {
                 group.add(fileList.get(i));
                 for (int j = i + 1; j < fileList.size(); j++) {
                     if (fileUtils.areFilesEqual(fileList.get(i), fileList.get(j))) {
                         group.add(fileList.get(j));
-                        checkedFiles.add(fileList.get(j));
+                        checkedDuplicateGroups.add(fileList.get(j));
                     }
                 }
                 if (group.size() > 1) {
@@ -50,13 +50,13 @@ public class FileDuplicateFinder {
 
     }
 
-    private List<File> listFiles(File directory) {
+    public List<File> listFilesInTheDirectory(File directory) {
         List<File> fileList = new ArrayList<>();
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
                 if (file.isDirectory()) {
-                    fileList.addAll(listFiles(file));
+                    fileList.addAll(listFilesInTheDirectory(file));
                 } else {
                     fileList.add(file);
                 }
@@ -65,24 +65,6 @@ public class FileDuplicateFinder {
         return fileList;
     }
 
-
-
-    public static void main(String[] arg) {
-        String[] args = new String[2];
-        args[0] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11";
-        args[1] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21";
-        FileDuplicateFinder finder = new FileDuplicateFinder();
-        for (int i = 0; i < args.length; i++) {
-            System.out.println();
-            System.out.println(" аргумент - " + i);
-            System.out.println();
-            if (args.length > 0) {
-                finder.findDuplicates(args[i]);
-            } else {
-                System.err.println("Вкажіть шлях до каталогу - " + args[i] + " як аргумент..");
-            }
-        }
-    }
 
 
 
