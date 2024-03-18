@@ -10,17 +10,13 @@ public class Main {
 
         List<String> paths = new ArrayList<String>();
         paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11");
-        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
+        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
         paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
-        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
+        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
 
         // проверим валидность аргументов
         ArgumentsProcessor processor = new ArgumentsProcessor();
         List<String> validPaths = processor.processArguments(paths);
-
-//        for (String path : validPaths) {
-//            System.out.println("Valid path: " + path);
-//        }
 
         FileDuplicateFinder finder = new FileDuplicateFinder();
         for (int i = 0; i < validPaths.size(); i++) {
@@ -29,16 +25,12 @@ public class Main {
             System.out.println("");
 
             // поиск дубликатов
-            List<List<File>> exampleGroups = finder.findDuplicates(validPaths.get(i));
+            List<List<File>> duplicateGroups = finder.findDuplicates(validPaths.get(i));
 
             // сортировка и вывод в консоль
-            DuplicateFileGroup group = new DuplicateFileGroup(exampleGroups);
+            DuplicateFileGroup group = new DuplicateFileGroup(duplicateGroups);
             group.printDuplicateGroups();
         }
-        List<List<File>> exampleGroups = new ArrayList<>();
-        // Заполнение exampleGroups данными
-        DuplicateFileGroup group = new DuplicateFileGroup(exampleGroups);
-        group.printDuplicateGroups();
     }
 
 }

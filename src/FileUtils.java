@@ -7,14 +7,7 @@ import java.util.List;
 //  Утилітарний клас для роботи з файлами
 // Методи для читання файлів та порівняння їх вмісту.
 public class FileUtils {
-//        private File file1;
-//        private File file2;
 //
-//        public FileUtils() {
-//            this.file1 = null;
-//            this.file2 = null;
-//        }
-
         public String readFile(String filePath) {
             StringBuilder content = new StringBuilder();
             try (FileInputStream fis = new FileInputStream(filePath)) {
@@ -44,12 +37,6 @@ public class FileUtils {
             byte[] content1 = readFile(file1.getAbsolutePath()).getBytes();
             byte[] content2 = readFile(file2.getAbsolutePath()).getBytes();
             return compareFilesContent(content1, content2);
-        }
-
-        public List<File> groupFilesBySize(List<File> fileList) {
-            List<File> result = new ArrayList<>();
-            // Тут можна реалізувати логіку угруповання з урахуванням розміру файла.
-            return result;
         }
 
 }
