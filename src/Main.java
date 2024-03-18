@@ -14,7 +14,8 @@ public class Main {
         //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11");paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
         //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
         //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
-        paths.add("/home/alek7ey/Рабочий стол");
+        //paths.add("/home/alek7ey/Рабочий стол");
+        paths.add("/home/alek7ey");
 
         // проверим валидность аргументов
         ArgumentsProcessor processor = new ArgumentsProcessor();
