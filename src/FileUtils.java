@@ -7,13 +7,13 @@ import java.util.List;
 //  Утилітарний клас для роботи з файлами
 // Методи для читання файлів та порівняння їх вмісту.
 public class FileUtils {
-        private File file1;
-        private File file2;
-
-        public FileUtils() {
-            this.file1 = null;
-            this.file2 = null;
-        }
+//        private File file1;
+//        private File file2;
+//
+//        public FileUtils() {
+//            this.file1 = null;
+//            this.file2 = null;
+//        }
 
         public String readFile(String filePath) {
             StringBuilder content = new StringBuilder();
@@ -23,7 +23,7 @@ public class FileUtils {
                     content.append((char) data);
                 }
             } catch (IOException e) {
-                System.err.println("Error reading file: " + e.getMessage());
+                System.err.println("Помилка читання файлу методом readFile: " + e.getMessage());
             }
             return content.toString();
         }
