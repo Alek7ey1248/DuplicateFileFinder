@@ -50,8 +50,8 @@ public class FileDuplicateFinder {
 
     }
 
-    public List<File> listFilesInTheDirectory(File directory) {
-        List<File> fileList = new ArrayList<>();
+    public Set<File> listFilesInTheDirectory(File directory) {
+        Set<File> fileList = new HashSet<>();
         File[] files = directory.listFiles();
         if (files != null) {
             for (File file : files) {
@@ -64,26 +64,6 @@ public class FileDuplicateFinder {
         }
         return fileList;
     }
-
-
-
-
-
-
-
-
-    //Вариант в терминале
-//        public static void main(String[] args) {
-//            FileDuplicateFinder finder = new FileDuplicateFinder();
-//            for (int i = 0; i < args.length; i++) {
-//                System.out.println(" аргумент - " + i);
-//                if (args.length > 0) {
-//                    finder.findDuplicates(args[i]);
-//                } else {
-//                    System.err.println("Вкажіть шлях до каталогу - " + args[i] + " як аргумент..");
-//                }
-//            }
-//        }
 
 }
 
