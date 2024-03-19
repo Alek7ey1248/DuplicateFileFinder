@@ -20,9 +20,25 @@ public class FileDuplicateFinder {
         this.fileUtils = new FileUtils();
     }
 
-    // в каждой группе файлов с одинаковым размером ищем группы дубликатов и добавляем в resGroup
-    // groupsBySize - должен быть упорядочен по убыванию размера и в группах Set<File> - файлы одного размера
-    public List<Set<File>> findDuplicatesInGroupLists(List<Set<File>> groupsBySize) {
+    // Основной метод поиска групп дубликатов
+    // полученый список файлов упорядочиваем для оптимизации поиска
+    // и методом findDuplicates ищем группы дубликатов
+    public List<Set<File>> groupingAndFindDuplicates(Set<File> setAllFiles) {
+
+        // конвертировать в List
+        List<File> listAllFiles = new ArrayList<>(setAllFiles);
+
+        // упорядочить по размеру
+        sortBySize(listAllFiles);
+        System.out.println("--после упорядочения -- ");
+        for (File f : listAllFiles) {
+            System.out.println(f.getName() + " - " + f.length());
+        }
+
+        // распределение по группам файлов одного размера и удаление групп с одним файлом
+        List<Set<File>> groupsBySize = groupsBySize(listAllFiles);
+
+        // в каждой группе файлов с одинаковым размером ищем группы дубликатов и добавляем в resGroup
         List<Set<File>> resGroup = new ArrayList<>();
         for (Set<File> set : groupsBySize) {
             List<File> lf = new ArrayList<>(set);
@@ -31,6 +47,7 @@ public class FileDuplicateFinder {
         }
         return resGroup;
     }
+
 
     public List<File> sortBySize(List<File> list) {
         Collections.sort(list, new Comparator<File>() {

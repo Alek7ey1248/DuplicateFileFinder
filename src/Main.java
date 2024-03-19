@@ -16,8 +16,8 @@ public class Main {
 
         paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
         paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
-//        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
-//        paths.add("/home/alek7ey/Рабочий стол");
+        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
+        paths.add("/home/alek7ey/Рабочий стол");
         //paths.add("/home/alek7ey");
 
         // проверим валидность аргументов
@@ -32,23 +32,17 @@ public class Main {
             File currentDirectory = new File(validPaths.get(i));
             setAllFiles.addAll(finder.listFilesInTheDirectory(currentDirectory));
         }
-        // конвертировать в List
-        List<File> listAllFiles = new ArrayList<>(setAllFiles);
 
-        // упорядочить по размеру
-        finder.sortBySize(listAllFiles);
-        System.out.println("--после упорядочения -- ");
-        for (File f : listAllFiles) {
-            System.out.println(f.getName() + " - " + f.length());
-        }
+        // полученый список файлов упорядочиваем для оптимизации поиска
+        // ищем группы дубликатов в resGroup
+        // finder.groupingAndFindDuplicates - 9438 мс - это в 64 раза быстрее чем finder.findDuplicates
+        List<Set<File>> resGroup = finder.groupingAndFindDuplicates(setAllFiles);
 
-        // распределение по группам файлов одного размера и удаление групп с одним файлом
-        List<Set<File>> newGroupsBySize = finder.groupsBySize(listAllFiles);
+        // finder.findDuplicates - 608567 мс
+//        List<File> listAllFiles = new ArrayList<>(setAllFiles);
+//        List<Set<File>> resGroup = finder.findDuplicates(listAllFiles);
 
-        // в каждой группе файлов с одинаковым размером ищем группы дубликатов и добавляем в resGroup
-        List<Set<File>> resGroup = finder.findDuplicatesInGroupLists(newGroupsBySize);
-
-        // вывод в консоль списков групп упорядоченных по размеру
+        // вывод в консоль списков групп упорядоченных по размеру предыдущим методом
         DuplicateFileGroup dfg = new DuplicateFileGroup();
         dfg.printDuplicateGroups(resGroup);
 
