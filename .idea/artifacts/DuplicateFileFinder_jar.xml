@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DuplicateFileFinder:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DuplicateFileFinder_jar</output-path>
+    <root id="archive" name="DuplicateFileFinder.jar">
+      <element id="module-output" name="DuplicateFileFinder" />
+    </root>
+  </artifact>
+</component>

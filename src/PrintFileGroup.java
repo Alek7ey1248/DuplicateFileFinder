@@ -2,26 +2,11 @@
 import java.io.File;
 import java.util.*;
 
-// Класс для группировки дубликатов файлов:
-//Представляет группу файлов с одинаковым содержимым.
-//Методы для добавления файлов в группу и вывода информации о группе.
-public class DuplicateFileGroup {
-
-    private List<List<File>> duplicateGroups;
-
-    public DuplicateFileGroup() {
-        duplicateGroups = new ArrayList<>();
-    }
-
-    public DuplicateFileGroup(List<List<File>> duplicateGroups) {
-        this.duplicateGroups = duplicateGroups;
-    }
-
-    public List<List<File>> getDuplicateGroups() {
-        return duplicateGroups;
-    }
+// Методы вывода в консоль
+public class PrintFileGroup {
 
     // вывод в консоль списков групп упорядоченных ранее по размеру
+    // актуальный метод
     public void printDuplicateGroups(List<Set<File>> resGroup) {
         for (Set<File> set : resGroup) {
             System.out.println();
@@ -36,7 +21,7 @@ public class DuplicateFileGroup {
 
 
     // устаревший метод сортировки и вывода рез в консоль
-    public void printDuplicateGroupsOld() {
+    public void printDuplicateGroupsOld(List<List<File>> duplicateGroups) {
         // Сортировка списка списков файлов по размеру от больших к меньшим
         Collections.sort(duplicateGroups, new FileListSizeComparator());
         for (List<File> group : duplicateGroups) {

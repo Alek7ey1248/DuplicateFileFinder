@@ -11,7 +11,7 @@ import java.util.stream.IntStream;
 // Методи для читання файлів та порівняння їх вмісту.
 public class FileUtils {
 
-        public String readFile(String filePath) {
+        private String readFile(String filePath) {
             StringBuilder content = new StringBuilder();
             try (FileInputStream fis = new FileInputStream(filePath)) {
                 int data;
@@ -24,7 +24,7 @@ public class FileUtils {
             return content.toString();
         }
 
-        public boolean compareFilesContent(byte[] content1, byte[] content2) {
+        private boolean compareFilesContent(byte[] content1, byte[] content2) {
             if (content1.length != content2.length) {
                 return false;
             }
@@ -35,31 +35,6 @@ public class FileUtils {
             }
             return true;
         }
-
-//    public boolean compareFilesContent(byte[] content1, byte[] content2) {
-//        if (content1.length != content2.length) {
-//            return false;
-//        }
-//
-//        int numChunks = Runtime.getRuntime().availableProcessors(); // Получаем количество доступных процессоров
-//        int chunkSize = content1.length / numChunks;
-//
-//        AtomicBoolean areEqual = new AtomicBoolean(true);
-//
-//        IntStream.range(0, numChunks).parallel().forEach(chunk -> {
-//            int start = chunk * chunkSize;
-//            int end = (chunk == numChunks - 1) ? content1.length : (chunk + 1) * chunkSize;
-//
-//            for (int i = start; i < end; i++) {
-//                if (content1[i] != content2[i]) {
-//                    areEqual.set(false);
-//                    break;
-//                }
-//            }
-//        });
-//
-//        return areEqual.get();
-//    }
 
 
         public boolean areFilesEqual(File file1, File file2) {
