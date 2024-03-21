@@ -47,13 +47,15 @@ public class FileDuplicateFinder {
 //        List<Set<File>> resGroup = new ArrayList<>();
 //        for (Set<File> set : groupsBySize) {
 //            List<File> lf = new ArrayList<>(set);
+//            System.out.println(" проверяются файлы размера - " + + lf.get(0).length() + " - " + lf.get(0).getName());
 //            List<Set<File>> lsf = findDuplicates(lf);
 //            resGroup.addAll(lsf);
 //        }
-        //--------------------------------------------------
+        //-------------------------------------------------- быстрее чем верхняя реализ в 2, 3 раза
         List<Set<File>> resGroup = groupsBySize.parallelStream()
                 .map(set -> {
                     List<File> lf = new ArrayList<>(set);
+                    System.out.println(" проверяются файлы размера - " + + lf.get(0).length() + " - " + lf.get(0).getName());
                     return findDuplicates(lf);
                 })
                 .flatMap(List::stream)
