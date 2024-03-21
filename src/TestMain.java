@@ -12,15 +12,15 @@ public class TestMain {
 //        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11");
 //        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12");
 //        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12/test13");
-//testlllllllll
 //        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/a1.txt");
 //        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21");
-//        paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
+        //paths.add("/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder");
         //paths.add("/home/alek7ey/Рабочий стол");   // 88 файлов - 7160 мс
-        //paths.add("/home/alek7ey/snap/telegram-desktop"); //- очень много, 5414 файлов но справляется, но очень долго
+        //paths.add("/home/alek7ey/snap/telegram-desktop"); //- очень много, 5414 файлов - 25972 мс
         //paths.add("/home/alek7ey/IdeaProjects");   // 1109 файлов за 40126 мс
         // paths.add("/home/alek7ey"); - суппер много - мой комп не справляется
-        paths.add("/home/alek7ey/Android");
+        //paths.add("/home/alek7ey/Android");    //
+        paths.add("/home");
 
         // проверим валидность аргументов
         ArgumentsProcessor processor = new ArgumentsProcessor();

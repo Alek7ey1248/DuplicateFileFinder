@@ -1,46 +1,93 @@
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
+import java.io.UncheckedIOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.stream.IntStream;
+import java.util.concurrent.*;
 
-//  Утилітарний клас для роботи з файлами
-// Методи для читання файлів та порівняння їх вмісту.
 public class FileUtils {
 
-        private String readFile(String filePath) {
-            StringBuilder content = new StringBuilder();
-            try (FileInputStream fis = new FileInputStream(filePath)) {
-                int data;
-                while ((data = fis.read()) != -1) {
-                    content.append((char) data);
-                }
-            } catch (IOException e) {
-                System.err.println("Помилка читання файлу методом readFile: " + e.getMessage());
-            }
-            return content.toString();
+    private static final int NUM_THREADS = Runtime.getRuntime().availableProcessors(); // Количество потоков для параллельного сравнения
+
+    public boolean areFilesEqual(File file1, File file2) {
+        if (!isValidFile(file1) || !isValidFile(file2)) {
+            return false;
         }
 
-        private boolean compareFilesContent(byte[] content1, byte[] content2) {
-            if (content1.length != content2.length) {
-                return false;
-            }
-            for (int i = 0; i < content1.length; i++) {
-                if (content1[i] != content2[i]) {
+        byte[] content1;
+        byte[] content2;
+        try {
+            content1 = Files.readAllBytes(file1.toPath());
+            content2 = Files.readAllBytes(file2.toPath());
+        } catch (IOException | UncheckedIOException e) {
+            System.out.println("Помилка читання файлу: " + e.getMessage());
+            return false;
+        }
+
+        if (content1.length != content2.length) {
+            return false;
+        }
+
+        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
+        List<Future<Boolean>> futures = new ArrayList<>();
+
+        int blockSize = content1.length / NUM_THREADS;
+        for (int i = 0; i < NUM_THREADS; i++) {
+            int start = i * blockSize;
+            int end = (i == NUM_THREADS - 1) ? content1.length : (i + 1) * blockSize;
+            byte[] block1 = new byte[end - start];
+            byte[] block2 = new byte[end - start];
+            System.arraycopy(content1, start, block1, 0, block1.length);
+            System.arraycopy(content2, start, block2, 0, block2.length);
+
+            Callable<Boolean> task = () -> compareFilesContent(block1, block2);
+            futures.add(executor.submit(task));
+        }
+
+        for (Future<Boolean> future : futures) {
+            try {
+                if (!future.get()) {
+                    executor.shutdown();
                     return false;
                 }
+            } catch (InterruptedException | ExecutionException e) {
+                System.out.println("Помилка порівняння файлів: " + e.getMessage());
+                return false;
             }
-            return true;
         }
 
+        executor.shutdown();
+        return true;
+    }
 
-        public boolean areFilesEqual(File file1, File file2) {
-            byte[] content1 = readFile(file1.getAbsolutePath()).getBytes();
-            byte[] content2 = readFile(file2.getAbsolutePath()).getBytes();
-            return compareFilesContent(content1, content2);
+    private boolean compareFilesContent(byte[] content1, byte[] content2) {
+        for (int i = 0; i < content1.length; i++) {
+            if (content1[i] != content2[i]) {
+                return false;
+            }
         }
+        return true;
+    }
 
+    private boolean isValidFile(File file) {
+        if (!file.isFile()) {
+            System.out.println("File " + file.getAbsolutePath() + " не є файлом.");
+            return false;
+        }
+        if (!file.canRead()) {
+            System.out.println("File " + file.getAbsolutePath() + " пошкоджений.");
+            return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        File file1 = new File("/home/alek7ey/Загрузки/photo_2021-12-09_16-12-54 (копия).jpg");
+        File file2 = new File("/home/alek7ey/Загрузки/photo_2021-12-09_16-12-54.jpg");
+        FileUtils comparator = new FileUtils();
+        boolean result = comparator.areFilesEqual(file1, file2);
+        //System.out.println("UM_THREADS - " + FileUtils.NUM_THREADS);
+        System.out.println("Файлы равны: " + result);
+    }
 }
