@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/DuplicateFileFinder_jar3</output-path>
     <root id="archive" name="DuplicateFileFinder.jar">
       <element id="module-output" name="DuplicateFileFinder" />
-      <element id="artifact" artifact-name="DuplicateFileFinder:jar" />
+      <element id="artifact" artifact-name="DuplicateFileFinder4:jar" />
     </root>
   </artifact>
 </component>
