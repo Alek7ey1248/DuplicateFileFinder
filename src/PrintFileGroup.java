@@ -12,9 +12,9 @@ public class PrintFileGroup {
             System.out.println();
             int k = 0;
             for (File file : set) {
-                if (k == 0) System.out.println(" --- одинаковые файлы типа - " + file.getName() + ", размера - " + file.length());
+                if (k == 0) System.out.println(" --- одинаковые файлы типа - " + file.getName() + ", размера - " + file.length()  + " байт");
                 k = 1;
-                System.out.println(file + " размер - " + file.length());
+                System.out.println(file);
             }
         }
     }

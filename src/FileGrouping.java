@@ -22,7 +22,7 @@ public class FileGrouping {
                 // Проверяем каждый файл в группе на идентичность по содержимому
                 for (int j = ii + 1; j < files.size(); j++) {
                     File otherFile = files.get(j);
-                    FileUtils fu = new FileUtils();
+                    ComparingTwoFiles fu = new ComparingTwoFiles();
                     if (fu.areFilesEqual(file, otherFile)) {
                         duplicateGroup.add(otherFile);
                     }

@@ -7,7 +7,6 @@ import java.util.*;
 //- Методи для угруповання та виведення результатів.
 
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,10 +14,10 @@ import java.util.stream.Collectors;
 // Клас для пошуку файлів у зазначеній директорії та її піддиректоріях
 // та пошуку груп дублікатів файлів.
 public class FileDuplicateFinder {
-    private FileUtils fileUtils;
+    private ComparingTwoFiles fileUtils;
 
     public FileDuplicateFinder() {
-        this.fileUtils = new FileUtils();
+        this.fileUtils = new ComparingTwoFiles();
     }
 
     // Основной метод поиска групп дубликатов

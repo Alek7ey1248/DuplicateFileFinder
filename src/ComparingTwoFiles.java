@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 
-public class FileUtils {
+public class ComparingTwoFiles {
 
-    private static final int NUM_THREADS = Runtime.getRuntime().availableProcessors(); // Количество потоков для параллельного сравнения
+    public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors(); // Количество потоков для параллельного сравнения
 
     public boolean areFilesEqual(File file1, File file2) {
         if (!isValidFile(file1) || !isValidFile(file2)) {
@@ -85,7 +85,7 @@ public class FileUtils {
     public static void main(String[] args) {
         File file1 = new File("/home/alek7ey/Загрузки/photo_2021-12-09_16-12-54 (копия).jpg");
         File file2 = new File("/home/alek7ey/Загрузки/photo_2021-12-09_16-12-54.jpg");
-        FileUtils comparator = new FileUtils();
+        ComparingTwoFiles comparator = new ComparingTwoFiles();
         boolean result = comparator.areFilesEqual(file1, file2);
         //System.out.println("UM_THREADS - " + FileUtils.NUM_THREADS);
         System.out.println("Файлы равны: " + result);
