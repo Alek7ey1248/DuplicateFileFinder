@@ -8,7 +8,19 @@ import java.util.concurrent.*;
 
 public class ComparingTwoFiles {
 
-    public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors(); // Количество потоков для параллельного сравнения
+    public static final int NUM_THREADS = calculateOptimalNumThreads();  // оптимальное кол-во потоков
+
+    public static int calculateOptimalNumThreads() {
+        int processors = Runtime.getRuntime().availableProcessors();
+        int optimalNumThreads;
+        if (processors < 8) {
+            optimalNumThreads = processors;
+        } else {
+            optimalNumThreads = Math.max(1, processors / 6);
+        }
+        return optimalNumThreads;
+    }
+
 
     public boolean areFilesEqual(File file1, File file2) {
         if (!isValidFile(file1) || !isValidFile(file2)) {
