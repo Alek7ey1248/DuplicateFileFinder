@@ -34,7 +34,7 @@ public class TestMain {
             File currentDirectory = new File(validPaths.get(i));
             setAllFiles.addAll(finder.listFilesInTheDirectory(currentDirectory));
         }
-        System.out.println(" кол-во всех файлов в директориях - " + setAllFiles.size()); ;
+        System.out.println(" кол-во всех файлов в директориях - " + setAllFiles.size());
 
         // полученый список файлов упорядочиваем для оптимизации поиска
         // ищем группы дубликатов в resGroup
