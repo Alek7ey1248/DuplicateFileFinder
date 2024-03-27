@@ -5,34 +5,22 @@ import java.util.*;
 // Методы вывода в консоль
 public class PrintFileGroup {
 
-    // вывод в консоль списков групп упорядоченных ранее по размеру
-    // актуальный метод
-    public void printDuplicateGroups(List<Set<File>> resGroup) {
-        for (Set<File> set : resGroup) {
-            System.out.println();
-            int k = 0;
-            for (File file : set) {
-                if (k == 0) System.out.println(" --- одинаковые файлы типа - " + file.getName() + ", размера - " + file.length()  + " байт");
-                k = 1;
-                System.out.println(file);
-            }
-        }
-    }
-
-
-    // устаревший метод сортировки и вывода рез в консоль
-    public void printDuplicateGroupsOld(List<List<File>> duplicateGroups) {
+    // метод сортировки и вывода рез в консоль
+    public void printDuplicateGroups(List<List<File>> duplicateGroups) {
         // Сортировка списка списков файлов по размеру от больших к меньшим
-        Collections.sort(duplicateGroups, new FileListSizeComparator());
+        //Collections.sort(duplicateGroups, new FileListSizeComparator());
         for (List<File> group : duplicateGroups) {
             if (!group.isEmpty()) {
-                File firstFile = group.get(0);
-                System.out.println("  Файлы такиеже как ----- " + firstFile.getName() +  " ---------------");
+                System.out.println();
+                boolean bool = true;
                 for (File file : group) {
+                    if (bool) System.out.println("  Группа одинаковых файлов типа - " + file.getName() + ",  размера - " + file.length() + " -------------------");
+                    bool = false;
                     System.out.println(file.getAbsolutePath());
                 }
                 System.out.println();
             }
         }
     }
+
 }

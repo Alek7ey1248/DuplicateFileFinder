@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 // определения интерфейса Comparator как сортировать списки по размеру вложеных в них файлов
 // Используется в классе DuplicateFileGroup в методе printDuplicateGroups при помощи Collections.sort(...

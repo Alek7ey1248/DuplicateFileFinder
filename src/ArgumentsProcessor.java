@@ -1,21 +1,18 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 // Обработка на валидность, введенных как аргументы путей
 public class ArgumentsProcessor {
-    public List<String> processArguments(List<String> args) {
-        Set<String> validPaths = new HashSet<>();
+    public List<String> processArguments(String[] parts) {
+        Set<String> validPaths = new HashSet<>(Arrays.asList(parts));
 
-        if (args.size() == 0) {
+        if (parts.length == 0) {
             System.err.println("Нічого не введено як аргументи.");
             List<String> list = new ArrayList<>(validPaths);
             return list;
         }
 
-        for (String arg : args) {
+        for (String arg : parts) {
             File file = new File(arg);
             if (!file.exists()) {
                 System.err.println("Путь " + arg + " не існує. Пропускаємо.");

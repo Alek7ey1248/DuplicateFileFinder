@@ -23,48 +23,8 @@ public class TestMain {
         paths.add("/home");
 
         // проверим валидность аргументов
-        ArgumentsProcessor processor = new ArgumentsProcessor();
-        List<String> validPaths = processor.processArguments(paths);
-
-        Set<File> setAllFiles = new HashSet<>();
-        FileDuplicateFinder finder = new FileDuplicateFinder();
-
-        for (int i = 0; i < validPaths.size(); i++) {
-            // все файлы в спмсок
-            File currentDirectory = new File(validPaths.get(i));
-            setAllFiles.addAll(finder.listFilesInTheDirectory(currentDirectory));
-        }
-        System.out.println(" кол-во всех файлов в директориях - " + setAllFiles.size());
-
-        // полученый список файлов упорядочиваем для оптимизации поиска
-        // ищем группы дубликатов в resGroup
-        // finder.groupingAndFindDuplicates - 9438 мс - это в 64 раза быстрее чем finder.findDuplicates
-        // когда добваил потоки то по времени - 7160 мс - трошки уменьшилось
-        List<Set<File>> resGroup = finder.groupingAndFindDuplicates(setAllFiles);
-
-        // finder.findDuplicates - 608567 мс
-//        List<File> listAllFiles = new ArrayList<>(setAllFiles);
-//        List<Set<File>> resGroup = finder.findDuplicates(listAllFiles);
-
-        // вывод в консоль списков групп упорядоченных по размеру предыдущим методом
-        PrintFileGroup dfg = new PrintFileGroup();
-        dfg.printDuplicateGroups(resGroup);
-
-
-
-
-
-
-        // !!!!!! тут все под вопросом - это использование ускоряющего класса FileGrouping !!!!
-//        FileGrouping fileGrouping = new FileGrouping();
-//        List<List<File>> duplicateGroups = FileGrouping.groupFiles(listAllFiles);
-
-        // сортировка и вывод в консоль
-//        DuplicateFileGroup group = new DuplicateFileGroup(duplicateGroups);
-//        group.printDuplicateGroups();
-
-
-
+//        ArgumentsProcessor processor = new ArgumentsProcessor();
+//        List<String> validPaths = processor.processArguments(paths);
 
         long endTime = System.nanoTime();
         long duration = (endTime - startTime) / 1_000_000; // Перевод наносекунд в миллисекунды
