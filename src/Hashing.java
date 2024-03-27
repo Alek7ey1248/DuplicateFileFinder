@@ -5,7 +5,11 @@ import java.security.MessageDigest;
 import java.io.FileInputStream;
 import java.security.NoSuchAlgorithmException;
 
-public class ComparingTwoFiles {
+public class Hashing {
+
+    private CheckValid checkValid;
+
+    public Hashing() {this.checkValid = new CheckValid();}
 
     // расчет хеша файла
     // хеши файлов представляют собой определенное числовое значение,
@@ -19,15 +23,15 @@ public class ComparingTwoFiles {
     // быстрого сравнения файлов на их эквивалентность.
     public int calculateContentHash(File file) {
 
-        if (!isValidFile(file)) {
-            return -10;
+        if (!checkValid.isValidFile(file)) {
+            return -1;
         }
 
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             FileInputStream fis = new FileInputStream(file);
-            // Значение 8192 (или 8 килобайт) является распространенным выбором для размера буфера при чтении данных из файла в Java. Этот размер обычно обеспечивает хорошую производительность при чтении и обработке данных.
-            byte[] buffer = new byte[8192];
+
+            byte[] buffer = new byte[8192];  // Значение 8192 (или 8 килобайт) является распространенным выбором для размера буфера при чтении данных из файла в Java. Этот размер обычно обеспечивает хорошую производительность при чтении и обработке данных.
             int bytesRead;
 
             while ((bytesRead = fis.read(buffer)) != -1) {
@@ -45,24 +49,12 @@ public class ComparingTwoFiles {
             }
 
             return hash;
+
         } catch (IOException | UncheckedIOException e) {
-            System.out.println(" Помилка читання файлу в методе calculateContentHash: " + e.getMessage());
-            return 0;
+            System.err.println(" Помилка читання файлу " + file.getName() + " в методе calculateContentHash: " + e.getMessage());
+            return -1;
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException(e);
         }
     }
-
-    private boolean isValidFile(File file) {
-        if (!file.isFile()) {
-            System.out.println("Метод isValidFile.    File " + file.getAbsolutePath() + " не є файлом.");
-            return false;
-        }
-        if (!file.canRead()) {
-            System.out.println("Метод isValidFile.     File " + file.getAbsolutePath() + " пошкоджений.");
-            return false;
-        }
-        return true;
-    }
-
 }

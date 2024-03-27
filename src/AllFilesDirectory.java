@@ -6,29 +6,18 @@ import java.util.Set;
 
 public class AllFilesDirectory {
 
-    private List<File> fileList;
-    private Set<File> fileSet;
-
-    public AllFilesDirectory() {
-        fileList = new ArrayList<>();
-        fileSet = new HashSet<>();
-    }
-
-    public List<File> getFileList() {
-        return new ArrayList<>(getFileSet());
-    }
-
-    public Set<File> getFileSet() {
-        return fileSet;
-    }
-
     // поиск всех файлов в нескольких директориях
-    public void findAllFilesInDirectories(List<String> pathDirectories){
+    public List<File> findAllFilesInDirectories(List<String> pathDirectories){
+
+        Set<File> fileSet = new HashSet<>();
+
         for (int i = 0; i < pathDirectories.size(); i++) {
             File currentDirectory = new File(pathDirectories.get(i));
             fileSet.addAll(findFilesInDirectory(currentDirectory));
         }
         System.out.println(" кол-во всех файлов в директориях - " + fileSet.size());
+
+        return new ArrayList<>(fileSet);
     }
 
 
@@ -46,28 +35,5 @@ public class AllFilesDirectory {
             }
         }
         return setOfFiles;
-    }
-
-
-    public static void main(String[] args) {
-        String[] paths = new String[5];
-        paths[0] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11";
-        paths[1] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12";
-        paths[2] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12/test13";
-        paths[3] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21";
-        paths[4] = "/home/alek7ey/snap/telegram-desktop";
-        //paths[4] = "/home";
-
-        // проверим валидность аргументов
-        ArgumentsProcessor processor = new ArgumentsProcessor();
-        List<String> validPaths = processor.processArguments(paths);
-
-        AllFilesDirectory allFilesDirectory = new AllFilesDirectory();
-        allFilesDirectory.findAllFilesInDirectories(validPaths);
-        List<File> files = allFilesDirectory.getFileList();
-        System.out.println(" кол- во файлов - " + files.size());
-        for (File f : files) {
-            System.out.println(f.getName());
-        }
     }
 }
