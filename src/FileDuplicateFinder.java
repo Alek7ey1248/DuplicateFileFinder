@@ -1,4 +1,10 @@
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,10 +21,10 @@ public class FileDuplicateFinder {
     // ( хеширование содержимого файла ).
     // Потом методом filterAndSortDuplicateGroups перегоняет
     // в List<List<File>> и сортирует.
-   public List<List<File>> findDuplicates(List<File> fileList) {
+    public List<List<File>> findDuplicates(List<File> fileList) {
 
         Map<Integer, List<File>> contentHashGroups = fileList.parallelStream()
-                .collect(Collectors.groupingByConcurrent(hashing::calculateContentHash));
+                .collect(Collectors.groupingByConcurrent(hashing::calculateHashWithSize));
 
         contentHashGroups.remove(-1); // в методе calculateContentHash -1 если невалидный файл
 
@@ -41,4 +47,6 @@ public class FileDuplicateFinder {
 
         return duplicateGroups;
     }
+
 }
+
