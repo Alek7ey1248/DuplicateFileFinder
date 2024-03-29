@@ -2,7 +2,6 @@
 import java.io.File;
 import java.util.*;
 
-// Методы вывода в консоль
 public class PrintFileGroup {
 
     // метод вывода рез в консоль

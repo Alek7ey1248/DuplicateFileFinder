@@ -10,7 +10,7 @@ public class FileDuplicateFinder {
     }
 
     // главный метод - разбивает по группам дубликаты по ключу который
-    // вычисляется методом calculateContentHash класса hashing
+    // вычисляется методом calculateHashWithSize класса Hashing
     // ( хеширование содержимого файла ).
     // Потом методом filterAndSortDuplicateGroups перегоняет
     // в List<List<File>> и сортирует.
@@ -29,6 +29,7 @@ public class FileDuplicateFinder {
         return filterAndSortDuplicateGroups(contentHashGroups);
     }
 
+
     // из HashMap все группы (> 1 файла) в List<List<File>> и сортирует
     private List<List<File>> filterAndSortDuplicateGroups(Map<Integer, List<File>> contentHashGroups) {
 
@@ -36,11 +37,7 @@ public class FileDuplicateFinder {
 
         for (List<File> group : contentHashGroups.values()) {
             if (group.size() > 1) {
-                //System.out.println("Группа размер " + group.get(0).length() + "   -----------------------");
                 duplicateGroups.add(group);
-//                for (File f : group) {
-//                    System.out.println(f.getName() + " размер - " + f.length());
-//                }
             }
         }
 

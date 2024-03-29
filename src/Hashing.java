@@ -23,6 +23,9 @@ public class Hashing {
 //    Таким образом, хеш содержимого файла представляет собой компактное
 //     числовое представление содержимого файла, которое используется для
 //     быстрого сравнения файлов на их эквивалентность.
+//
+//    Для 100% определения эдентичности по содержанию файлов в группе по ключу - хеш
+//    к хешу доюавляем и размер файла
     public int calculateHashWithSize(File file) {
 
         if (!checkValid.isValidFile(file))  return -1;
@@ -60,6 +63,7 @@ public class Hashing {
 
 
 
+//    тут метод calculateHashWithSize разделенный на два
 
     //    public int calculateHashWithSize(File file) {
 //        if (!checkValid.isValidFile(file)) {
