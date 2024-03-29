@@ -3,7 +3,7 @@ import java.util.*;
 
 public class FileDuplicateFinder {
 
-    private Hashing hashing;
+    private final Hashing hashing;
 
     public FileDuplicateFinder() {
         this.hashing = new Hashing();
