@@ -35,12 +35,13 @@ public class CheckValid {
 
     // проверка файла
     public boolean isValidFile(File file) {
-        if (!file.isFile()) {
-            System.err.println("Метод isValidFile.    File " + file.getAbsolutePath() + " не є файлом.");
-            return false;
-        }
+
         if (!file.canRead()) {
             System.err.println("Метод isValidFile.     File " + file.getAbsolutePath() + " пошкоджений.");
+            return false;
+        }
+        if (!file.isFile()) {
+            System.err.println("Метод isValidFile.    File " + file.getAbsolutePath() + " не є файлом.");
             return false;
         }
         return true;

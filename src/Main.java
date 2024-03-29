@@ -10,12 +10,12 @@ public class Main {
 
         String[] paths = new String[1];
 //        paths[0] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11";
-//        paths[1] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12";
+        //paths[0] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12";
 //        paths[2] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test11/test12/test13";
 //        paths[3] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder/test21";
         //paths[4] = "/home/alek7ey/Рабочий стол/TestsDuplicateFileFinder";
-        paths[0] = "/home/alek7ey/snap/telegram-desktop";
-        //paths[4] = "/home";
+        //paths[0] = "/home/alek7ey/snap/telegram-desktop";
+        paths[0] = "/home";
         //paths[4] = "/home/alek7ey/Загрузки";
 
         // проверим валидность аргументов
