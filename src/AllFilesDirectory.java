@@ -11,8 +11,8 @@ public class AllFilesDirectory {
 
         Set<File> fileSet = new HashSet<>();
 
-        for (int i = 0; i < paths.size(); i++) {
-            File dir = new File(paths.get(i));
+        for (String path : paths) {
+            File dir = new File(path);
             fileSet.addAll(findFilesInDirectory(dir));
         }
         System.out.println(" кол-во всех файлов в директориях - " + fileSet.size());
